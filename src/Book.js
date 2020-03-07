@@ -11,12 +11,13 @@ const simpleBook = b => ({
         ? `url("${b.imageLinks.thumbnail}")`
         : `url("${require('./img/noimage.png')}")`
   },
-  id: b.id
+  id: b.id,
+  shelf: b.shelf || 'none'
 });
 
 const Book = (props) => {
 
-    const { title, authors, cover } = simpleBook(props.bookDetails);
+    const { title, authors, cover, shelf, id } = simpleBook(props.bookDetails);
     const { width, height, backgroundImage } = cover;
     return (
       <div className="book">
@@ -30,7 +31,7 @@ const Book = (props) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <BookShelfChanger />
+            <BookShelfChanger bookid={id} shelf={shelf}/>
           </div>
         </div>
         <div className="book-title">{title}</div>
