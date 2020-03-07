@@ -11,8 +11,6 @@ class SearchPage extends Component {
 
   handleInputChange = event => {
 
-    console.log(event.target.value);
-
     this.setState({ searchText: event.target.value });
 
     if(event.target.value === "") {
