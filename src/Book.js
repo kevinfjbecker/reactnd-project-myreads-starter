@@ -7,7 +7,9 @@ const simpleBook = b => ({
   "cover": {
       "width": 128,
       "height": 192,
-      "backgroundImage": `url("${b.imageLinks.thumbnail}")`
+      "backgroundImage": b.imageLinks && b.imageLinks.thumbnail
+        ? `url("${b.imageLinks.thumbnail}")`
+        : `url("${require('./img/noimage.png')}")`
   },
   id: b.id
 });
