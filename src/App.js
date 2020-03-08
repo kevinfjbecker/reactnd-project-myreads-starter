@@ -20,8 +20,17 @@ class BooksApp extends React.Component {
 
   navigateToSearch = () => this.setState({ showSearchPage: true })
 
-  moveBook = (bookId, shelfName) => {
-    console.log(`Move ${bookId} to ${shelfName}`);
+  moveBook = (book, shelfName) => {
+    this.setState((state) => {
+      const bookToMove = state.books.filter(b => b.id === book.id)[0];
+      if(bookToMove !== undefined) {
+        bookToMove.shelf = shelfName;
+      } else {
+        book.shelf = shelfName;
+        state.books.push(book);
+      }
+      return state;
+    });
   }
 
   componentDidMount() {
@@ -36,6 +45,7 @@ class BooksApp extends React.Component {
         {this.state.showSearchPage ? (
           <SearchPage
             handleShelfChange={this.moveBook}
+            books={this.state.books}
             toListBooks={this.navigateToListBooks}
           />
         ) : (

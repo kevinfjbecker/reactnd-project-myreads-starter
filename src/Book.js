@@ -15,8 +15,12 @@ const simpleBook = b => ({
   shelf: b.shelf || 'none'
 });
 
+
 const Book = (props) => {
 
+    const changeShelf = (shelfName) => {
+      props.handleShelfChange(props.bookDetails, shelfName);
+    };
     const { title, authors, cover, shelf, id } = simpleBook(props.bookDetails);
     const { width, height, backgroundImage } = cover;
     return (
@@ -32,7 +36,7 @@ const Book = (props) => {
           ></div>
           <div className="book-shelf-changer">
             <BookShelfChanger
-              handleShelfChange={props.handleShelfChange}
+              handleShelfChange={changeShelf}
               bookId={id}
               shelf={shelf}
             />
