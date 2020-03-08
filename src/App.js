@@ -29,7 +29,15 @@ class BooksApp extends React.Component {
         book.shelf = shelfName;
         state.books.push(book);
       }
-      return state;
+
+      // This should update the server-side data model and refresh the local copy.
+      // The server-side seems unchanged and negates local updates.
+      // BooksAPI.update(book.id, shelfName)
+      //   .then((data)=>console.log(data))
+      //   .then(BooksAPI.getAll)
+      //   .then(booksRemote => this.setState({ books: booksRemote || [] }) );
+      
+        return state;
     });
   }
 
