@@ -11,23 +11,26 @@ class BooksApp extends React.Component {
   }
 
   moveBook = (book, shelfName) => {
-    this.setState((state) => {
-      const bookToMove = state.books.filter(b => b.id === book.id)[0];
+
+    // update an existing book or add a new book
+    this.setState((prevState) => {
+      const bookToMove = prevState.books.filter(b => b.id === book.id)[0];
       if(bookToMove !== undefined) {
         bookToMove.shelf = shelfName;
       } else {
         book.shelf = shelfName;
-        state.books.push(book);
+        prevState.books.push(book);
       }
 
-      // This should update the server-side data model and refresh the local copy.
-      // The server-side seems unchanged and negates local updates.
-      // BooksAPI.update(book.id, shelfName)
-      //   .then((data)=>console.log(data))
-      //   .then(BooksAPI.getAll)
-      //   .then(booksRemote => this.setState({ books: booksRemote || [] }) );
-      
-        return state;
+      // update remote data and refresh from server
+      // this completes after moveBook exits
+      BooksAPI.update(book.id, shelfName)
+        .then((data)=>console.log(data))
+        .then(BooksAPI.getAll)
+        .then(booksRemote => this.setState({ books: booksRemote || [] }) );
+
+        // local state updates first, while API calls are resolving.
+        return prevState;
     });
   }
 
