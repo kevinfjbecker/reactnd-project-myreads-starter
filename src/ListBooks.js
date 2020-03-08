@@ -22,6 +22,7 @@ const ListBooks = (props) => {
           shelves.map(shelf => (
             <Bookshelf
               key={shelf.id}
+              handleShelfChange={props.handleShelfChange}
               shelfTitle={shelf.title}
               books={getBooksByShelf(props.books, shelf.id)}
             />  

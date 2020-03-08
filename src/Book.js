@@ -31,7 +31,11 @@ const Book = (props) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <BookShelfChanger bookid={id} shelf={shelf}/>
+            <BookShelfChanger
+              handleShelfChange={props.handleShelfChange}
+              bookId={id}
+              shelf={shelf}
+            />
           </div>
         </div>
         <div className="book-title">{title}</div>

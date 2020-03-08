@@ -7,7 +7,10 @@ const BooksGrid = (props) => {
         {
           props.books.map((book) => (
             <li key={book.id}>
-              <Book bookDetails={book} />
+              <Book
+                handleShelfChange={props.handleShelfChange}
+                bookDetails={book}
+              />
             </li>
           ))
         }

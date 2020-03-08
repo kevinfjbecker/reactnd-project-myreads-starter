@@ -62,7 +62,10 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BooksGrid books={this.state.books} />
+          <BooksGrid
+            handleShelfChange={this.props.handleShelfChange}
+            books={this.state.books}
+          />
         </div>
       </div>
     );

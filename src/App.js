@@ -20,6 +20,10 @@ class BooksApp extends React.Component {
 
   navigateToSearch = () => this.setState({ showSearchPage: true })
 
+  moveBook = (bookId, shelfName) => {
+    console.log(`Move ${bookId} to ${shelfName}`);
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then(booksRemote => { 
       this.setState({ books: booksRemote || [] })
@@ -30,9 +34,16 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchPage toListBooks={this.navigateToListBooks} />
+          <SearchPage
+            handleShelfChange={this.moveBook}
+            toListBooks={this.navigateToListBooks}
+          />
         ) : (
-          <ListBooks books={this.state.books} toSearch={this.navigateToSearch} />
+          <ListBooks
+            handleShelfChange={this.moveBook}
+            books={this.state.books}
+            toSearch={this.navigateToSearch}
+          />
         )}
       </div>
     )

@@ -15,7 +15,9 @@ const BookShelfChanger = (props) => {
     return (
       <select
         value={props.shelf}
-        onChange={(e)=>{console.log(props.bookid + ', ' + e.target.value)}}
+        onChange={(event) => {
+          props.handleShelfChange(props.bookId, event.target.value)
+        }}
       >
         <option value="move" disabled>Move to...</option>
         {

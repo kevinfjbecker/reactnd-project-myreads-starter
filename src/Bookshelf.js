@@ -6,7 +6,10 @@ const Bookshelf = (props) => {
       <div className="bookshelf">
         <h2 className="bookshelf-title">{props.shelfTitle}</h2>
         <div className="bookshelf-books">
-          <BooksGrid books={props.books} />
+          <BooksGrid
+            handleShelfChange={props.handleShelfChange}
+            books={props.books}
+          />
         </div>
       </div>
     );
