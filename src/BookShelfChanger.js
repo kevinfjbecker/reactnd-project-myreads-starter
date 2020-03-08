@@ -1,13 +1,30 @@
 import React from 'react';
 
-const BookShelfChanger = () => {
+const shelves = [
+  {id: "currentlyReading", title: "Currently Reading"},
+  {id: "wantToRead", title: "Want to Read"},
+  {id: "read", title: "Read"},
+  {id: "none", title: "None"}
+]; 
+
+const ShelfOption = (props) => (
+  <option value={props.shelf.id}>{props.shelf.title}</option>
+);
+
+const BookShelfChanger = (props) => {
     return (
-      <select>
+      <select
+        value={props.shelf}
+        onChange={(event) => {
+          props.handleShelfChange(event.target.value)
+        }}
+      >
         <option value="move" disabled>Move to...</option>
-        <option value="currentlyReading">Currently Reading</option>
-        <option value="wantToRead">Want to Read</option>
-        <option value="read">Read</option>
-        <option value="none">None</option>
+        {
+          shelves.map(s => (
+            <ShelfOption key={s.id} shelf={s} />
+          ))
+        }
       </select>
     );
   };

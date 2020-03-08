@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import * as BooksAPI from './BooksAPI';
 import BooksGrid from './BooksGrid';
 
+const mergeShelfState = (source, sink) => {
+  return sink.map(sinkBook => {
+    const sourceBook = source.filter(sourceBook =>
+      sinkBook.id === sourceBook.id
+    )[0];
+    sinkBook.shelf = sourceBook && sourceBook.shelf;
+    return sinkBook;
+  });
+};
+
 class SearchPage extends Component {
 
   state = {
@@ -10,8 +20,6 @@ class SearchPage extends Component {
   };
 
   handleInputChange = event => {
-
-    console.log(event.target.value);
 
     this.setState({ searchText: event.target.value });
 
@@ -32,7 +40,7 @@ class SearchPage extends Component {
         this.setState({
           books: (
             booksFound && this.state.searchText !== ""
-              ? booksFound
+              ? mergeShelfState(this.props.books, booksFound)
               : []
           )
         });
@@ -59,12 +67,16 @@ class SearchPage extends Component {
               placeholder="Search by title or author"
               value={this.state.searchText}
               onChange={this.handleInputChange}
+              autoFocus
             />
   
           </div>
         </div>
         <div className="search-books-results">
-          <BooksGrid books={this.state.books} />
+          <BooksGrid
+            handleShelfChange={this.props.handleShelfChange}
+            books={this.state.books}
+          />
         </div>
       </div>
     );

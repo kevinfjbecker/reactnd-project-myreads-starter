@@ -20,6 +20,27 @@ class BooksApp extends React.Component {
 
   navigateToSearch = () => this.setState({ showSearchPage: true })
 
+  moveBook = (book, shelfName) => {
+    this.setState((state) => {
+      const bookToMove = state.books.filter(b => b.id === book.id)[0];
+      if(bookToMove !== undefined) {
+        bookToMove.shelf = shelfName;
+      } else {
+        book.shelf = shelfName;
+        state.books.push(book);
+      }
+
+      // This should update the server-side data model and refresh the local copy.
+      // The server-side seems unchanged and negates local updates.
+      // BooksAPI.update(book.id, shelfName)
+      //   .then((data)=>console.log(data))
+      //   .then(BooksAPI.getAll)
+      //   .then(booksRemote => this.setState({ books: booksRemote || [] }) );
+      
+        return state;
+    });
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then(booksRemote => { 
       this.setState({ books: booksRemote || [] })
@@ -30,9 +51,17 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchPage toListBooks={this.navigateToListBooks} />
+          <SearchPage
+            handleShelfChange={this.moveBook}
+            books={this.state.books}
+            toListBooks={this.navigateToListBooks}
+          />
         ) : (
-          <ListBooks books={this.state.books} toSearch={this.navigateToSearch} />
+          <ListBooks
+            handleShelfChange={this.moveBook}
+            books={this.state.books}
+            toSearch={this.navigateToSearch}
+          />
         )}
       </div>
     )

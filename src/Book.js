@@ -7,14 +7,21 @@ const simpleBook = b => ({
   "cover": {
       "width": 128,
       "height": 192,
-      "backgroundImage": `url("${b.imageLinks.thumbnail}")`
+      "backgroundImage": b.imageLinks && b.imageLinks.thumbnail
+        ? `url("${b.imageLinks.thumbnail}")`
+        : `url("${require('./img/noimage.png')}")`
   },
-  id: b.id
+  id: b.id,
+  shelf: b.shelf || 'none'
 });
+
 
 const Book = (props) => {
 
-    const { title, authors, cover } = simpleBook(props.bookDetails);
+    const changeShelf = (shelfName) => {
+      props.handleShelfChange(props.bookDetails, shelfName);
+    };
+    const { title, authors, cover, shelf, id } = simpleBook(props.bookDetails);
     const { width, height, backgroundImage } = cover;
     return (
       <div className="book">
@@ -28,7 +35,11 @@ const Book = (props) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <BookShelfChanger />
+            <BookShelfChanger
+              handleShelfChange={changeShelf}
+              bookId={id}
+              shelf={shelf}
+            />
           </div>
         </div>
         <div className="book-title">{title}</div>
