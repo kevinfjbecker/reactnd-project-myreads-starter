@@ -20,7 +20,7 @@ const Book = (props) => {
     props.handleShelfChange(props.bookDetails, shelfName);
   };
   const { title, authors, cover, shelf, id } = simpleBook(props.bookDetails);
-  const { width, height, backgroundImage } = cover;
+  const { backgroundImage } = cover;
   return (
     <div className="book">
       <div className="book-top">
