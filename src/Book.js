@@ -5,8 +5,6 @@ const simpleBook = b => ({
   "title": b.title,
   "authors": b.authors ? b.authors.join(', ') : '',
   "cover": {
-    "width": 128,
-    "height": 192,
     "backgroundImage": b.imageLinks && b.imageLinks.thumbnail
       ? `url("${b.imageLinks.thumbnail}")`
       : `url("${require('./img/noimage.png')}")`
@@ -29,8 +27,6 @@ const Book = (props) => {
         <div
           className="book-cover"
           style={{
-            width: width,
-            height: height,
             backgroundImage: backgroundImage
           }}
         ></div>
