@@ -2,14 +2,13 @@
 
 This my project submission for Udacity's React Fundamental section of the React nanodegree.
 
-## TL;DR
-
-To get started developing right away:
+## Running Locally
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
-## What You're Getting
+## Repository Map
+
 ```bash
 ├── CONTRIBUTING.md
 ├── README.md - This file.
@@ -60,7 +59,7 @@ Method Signature:
 update(book, shelf)
 ```
 
-* book: `<Object>` containing at minimum an `id` attribute
+* bookId: `<String>` the id for the book
 * shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
 * Returns a Promise which resolves to a JSON object containing the response data of the POST request
 
@@ -82,9 +81,3 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
