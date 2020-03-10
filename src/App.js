@@ -15,7 +15,7 @@ class BooksApp extends React.Component {
     // update an existing book or add a new book
     this.setState((prevState) => {
       const bookToMove = prevState.books.filter(b => b.id === book.id)[0];
-      if(bookToMove !== undefined) {
+      if (bookToMove !== undefined) {
         bookToMove.shelf = shelfName;
       } else {
         book.shelf = shelfName;
@@ -25,17 +25,17 @@ class BooksApp extends React.Component {
       // update remote data and refresh from server
       // this completes after moveBook exits
       BooksAPI.update(book.id, shelfName)
-        .then((data)=>console.log(data))
+        .then((data) => console.log(data))
         .then(BooksAPI.getAll)
-        .then(booksRemote => this.setState({ books: booksRemote || [] }) );
+        .then(booksRemote => this.setState({ books: booksRemote || [] }));
 
-        // local state updates first, while API calls are resolving.
-        return prevState;
+      // local state updates first, while API calls are resolving.
+      return prevState;
     });
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(booksRemote => { 
+    BooksAPI.getAll().then(booksRemote => {
       this.setState({ books: booksRemote || [] })
     });
   }

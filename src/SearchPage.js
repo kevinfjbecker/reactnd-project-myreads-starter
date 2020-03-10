@@ -24,15 +24,15 @@ class SearchPage extends Component {
 
     this.setState({ searchText: event.target.value });
 
-    if(event.target.value === "") {
+    if (event.target.value === "") {
       this.setState({ books: [] });
       return;
     }
 
     BooksAPI.search(event.target.value)
       .then(booksFound => {
-        
-        if(booksFound.error) {
+
+        if (booksFound.error) {
           console.log(booksFound.error);
           this.setState({ books: [] });
           return;
@@ -50,7 +50,7 @@ class SearchPage extends Component {
   };
 
   render() {
-      return (
+    return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link to='/'>
@@ -72,7 +72,7 @@ class SearchPage extends Component {
               onChange={this.handleInputChange}
               autoFocus
             />
-  
+
           </div>
         </div>
         <div className="search-books-results">

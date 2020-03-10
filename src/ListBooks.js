@@ -3,9 +3,9 @@ import Bookshelf from './Bookshelf';
 import { Link } from 'react-router-dom';
 
 const shelves = [
-  {id: "currentlyReading", title: "Currently Reading"},
-  {id: "wantToRead", title: "Want to Read"},
-  {id: "read", title: "Read"}
+  { id: "currentlyReading", title: "Currently Reading" },
+  { id: "wantToRead", title: "Want to Read" },
+  { id: "read", title: "Read" }
 ];
 
 const getBooksByShelf = (books, shelf) => {
@@ -26,7 +26,7 @@ const ListBooks = (props) => {
               handleShelfChange={props.handleShelfChange}
               shelfTitle={shelf.title}
               books={getBooksByShelf(props.books, shelf.id)}
-            />  
+            />
           ))
         }</div>
       </div>
